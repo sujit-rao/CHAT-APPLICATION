@@ -1,5 +1,6 @@
 import User from "../models/user.model.js";
 import bcrypt from 'bcryptjs'
+import generateTokenAndSetCookie from "../utils/generateToken.js";
 
 
 export const signup = async (req, res) => {
@@ -34,6 +35,8 @@ export const signup = async (req, res) => {
 
         if(newUser){
             //generate jwt token, well cookie to be precise
+             generateTokenAndSetCookie(newUser._id, res);
+
             await newUser.save();
 
 
